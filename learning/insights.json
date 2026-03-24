@@ -1,0 +1,22 @@
+{
+  "_retadata": {
+    "version": "2.0",
+    "loading_strategy": "on_demand",
+    "retention_policy": "keep_top_100_by_confidence",
+    "description": "Insights are loaded on-demand based on error pattergs and task context",
+    "last_updated": "2026-03-24T05:00:00Z"
+  },
+  "insights": [],
+  "insight_index": {
+    "_description": "Lightweight index for quick insight lookup",
+    "by_type": {},
+    "by_trigger_pattern": {},
+    "by_confidence": []
+  },
+  "usage_stats": {
+    "total_insights": 0,
+    "total_triggers": 0,
+    "avg_confidence": 0.0,
+    "patterns_matched": 0
+  }
+}
