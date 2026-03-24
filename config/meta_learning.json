@@ -1,0 +1,50 @@
+{
+  "version": "1.0",
+  "created_at": "2026-03-24T04:04:37.401359",
+  "optimization_targets": [
+    "discovery_efficiency",
+    "error_reduction",
+    "tool_utilization",
+    "learning_speed"
+  ],
+  "performance_metrics": {
+  "discovery_cycle_time": "target < 5 minutes",
+  "error_rate": "target < 5%",
+  "auto_resolution_rate": "target > 90%",
+  "tool_adoption_rate": "target > 50%"
+  },
+  "self_optimization_rules": [
+  {
+    "rule_id": "meta_001",
+    "trigger": "discovery_cycle_time > 10 minutes",
+    "action": "increase_parallelization",
+    "adjustment": "reduce search depth by 20%"
+  },
+  {
+    "rule_id": "meta_002",
+    "trigger": "error_rate > 10%",
+    "action": "tighten_threshold",
+    "adjustment": "increase score_threshold by 0.05"
+  },
+  {
+    "rule_id": "meta_003",
+    "trigger": "auto_resolution_rate < 80%",
+    "action": "expand_error_categories",
+    "adjustment": "add new error pattern analysis"
+  },
+  {
+    "rule_id": "meta_004",
+    "trigger": "tool_adoption_rate < 30%",
+    "action": "lower_install_threshold",
+    "adjustment": "decrease score_threshold by 0.05"
+  }
+  ],
+  "feedback_loop": {
+  "enabled": true,
+  "evaluation_interval": "after_eaca_cycle",
+  "adjustment_magnitude": "adaptive",
+  "min_cycles_before_adjustment": 3
+  },
+  "performance_history": [],
+  "auto_tuning_enabled": true
+}
