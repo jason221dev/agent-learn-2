@@ -58,3 +58,7 @@ logs/
 tmp/
 temp/
 *.tmp
+
+# Removed components
+mcps/
+skills/

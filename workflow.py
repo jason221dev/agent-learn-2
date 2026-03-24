@@ -1,43 +1,129 @@
-# Agent Kyarn 2 - Main Workflow
+#!/usr/bin/env python3
+"""
+Agent Learn 2 - Main Workflow
+Autonomous Self-Improving AI Framework v2.1
+Author: jason221dev
+License: MIT
+"""
 
-## Overview
-This is the main orchestrator for the Agent Kyarn 2 framework. It implements version 2.0 with just-in-time loading of skills, MCPs, and insights.
+from core.hierarchical_error_schema import HierarchicalErrorSchema, CommandHandler, GlobalOptimizations
+import os
 
-## Architecture V2.0 Features
-- **Just-in-time loading**: Skills/MCPs/insights load only when needed
-- **Discovery limitsz*: Top 20 repos per keyword by recent stars
-- **Autonomous improvementsz*: System proposes architecture enhancements on new error patterns
-- **Pattern matching*: Insights registry with exact error wording triggers
+class AgentLearn2:
+    """
+    Main agent class for autonomous learning and improvement.
+    Focus: Error handling, solution discovery, and continuous improvement.
+    """
+    
+    def __init__(self, github_token=None):
+        """Initialize the agent with error schema and global optimizations."""
+        self.error_schema = HierarchicalErrorSchema()
+        
+        if github_token:
+            self.error_schema.set_github_token(github_token)
+        
+        self.global_opts = self.error_schema.global_optimizations
+    
+    def classify_error(self, error_message: str, error_type: str = ""):
+        """
+        Classify an error into the hierarchical schema.
+        
+        Args:
+            error_message: The error message to classify
+            error_type: Optional explicit error type
+        
+        Returns:
+            tuple: (category_name, group_id)
+        """
+        return self.error_schema.classify_error(error_message, error_type)
+    
+    def add_solution(self, category: str, group_id: str, 
+                    solution_code: str, description: str, confidence: float):
+        """
+        Add a solution to an error group.
+        
+        Args:
+            category: Error category (e.g., 'python', 'github')
+            group_id: Error group ID
+            solution_code: The solution code
+            description: Solution description
+            confidence: Confidence score (0.0-1.0)
+        """
+        self.error_schema.add_solution(
+            category, group_id, solution_code, description, confidence
+        )
+    
+    def get_best_solution(self, category: str, group_id: str):
+        """
+        Get the best ranked solution for an error group.
+        
+        Args:
+            category: Error category
+            group_id: Error group ID
+        
+        Returns:
+            Solution object or None
+        """
+        return self.error_schema.get_best_solution(category, group_id)
+    
+    def run_discovery_cycle(self, keywords=None):
+        """
+        Run a discovery cycle to find new solutions.
+        Currently a placeholder for future GitHub API integration.
+        
+        Args:
+            keywords: Optional keywords to search for
+        """
+        print("Discovery cycle initiated")
+        # Future: Implement GitHub search for new solutions
+        pass
+    
+    def handle_command(self, command: str, context=None):
+        """
+        Handle a command string.
+        
+        Args:
+            command: Command string (e.g., '/load', '/help')
+            context: Optional context dictionary
+        
+        Returns:
+            str: Command result
+        """
+        if context is None:
+            context = {}
+        
+        handler = CommandHandler(self.error_schema)
+        return handler.execute_command(command, context)
 
-## Usage
- ```bash
-# Run the framework
-python3 workflow.py
 
-# Run with custom keywords
-python3 -c "from workflow import AgentLearn2; agent = AgentLearn2(); agent.run_discovery_cycle(keywords=['your', keywor]]"
-```
+def main():
+    """Main entry point."""
+    # Initialize agent
+    agent = AgentLearn2(github_token=os.getenv('GITHUB_TOKEN'))
+    
+    # Example: Classify an error
+    category, group_id = agent.classify_error(
+        "ModuleNotFoundError: No module named 'requests'"
+    )
+    print(f"Classified: {category}/{group_id}")
+    
+    # Example: Add a solution
+    agent.add_solution(
+        category, group_id,
+        "pip install requests",
+        "Install missing package",
+        0.95
+    )
+    
+    # Example: Get best solution
+    best = agent.get_best_solution(category, group_id)
+    if best:
+        print(f"Best solution: {best.code}")
+    
+    # Example: Handle command
+    result = agent.handle_command("/status", {})
+    print(f"Status: {result}")
 
-## Just-In-Time Loading
-The framework loads registries only when explicitly requested:
-- ```json
-{
-  "skill_registry": "loaded only when get_skill_by_trigger() called",
-  "mcp_registry": "loaded only when get_mcp_by_trigger() called",
-  "insights": "loaded only when match_error_pattern() called"
-}
- ```
 
-## Autonomous Improvements
-When a new error pattern is detected, the system autonomously:
-1. Analyzes the error root cause
-2. Proposes an architecture enhancement
-3. Creates a proposal in `learning/improvements/`
-4. Requires 0.9 confidence for auto-implementation
-
-## Discovery Limits
-Each discovery cycle searches:
-- Top 20 reporitories pek keyword (skill, mcp, agent)
-- Sorted by recent stars (not all time)
-- Minimum 50 stars required
-- Maximum 3 minutes discovery time
+if __name__ == "__main__":
+    main()

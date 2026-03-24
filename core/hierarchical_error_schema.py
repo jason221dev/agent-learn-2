@@ -277,7 +277,7 @@ class GlobalOptimizations:
             self.optimizations = {
                 "architecture_patterns": {
                     "jit_loading": {
-                        "description": "Just-in-time loading for skills/MCPs",
+                        "description": "Just-in-time loading for modules",
                         "memory_reduction": "95%",
                         "applicable": "all"
                     },
@@ -462,7 +462,7 @@ class HierarchicalErrorSchema:
         
         # Determine category
         category_mapping = {
-            'github': ['github', 'git', 'remote', 'repository', 'commit', 'push', 'pull'],
+            'github': ['github', 'git', 'remote', 'repository', 'commit', 'push', 'pull', 'fatal:', 'authentication failed'],
             'python': ['python', 'importerror', 'syntaxerror', 'traceback', 'module'],
             'system': ['permission', 'access denied', 'sudo', 'root', 'privilege'],
             'network': ['network', 'connection', 'timeout', 'http', 'api', 'request'],
