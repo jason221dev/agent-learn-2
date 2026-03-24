@@ -2,19 +2,61 @@
   "_metadata": {
     "version": "2.0",
     "loading_strategy": "just_in_time",
-    "cache_strategy": "llu_cache_size_10",
-    "description": "Skills are loaded only when explicitly requested by the LMM based on task requirements",
+    "cache_strategy": "lru_cache_size_10",
+    "description": "Skills are loaded only when explicitly requested by the LLM based on task requirements",
     "last_updated": "2026-03-24T05:00:00Z"
   },
-  "skills": [],
+  "skills": [
+    {
+      "skill_id": "video_converter",
+      "name": "Video Format Converter",
+      "description": "Converts videos between formats using ffmpeg (MP4, AVI, MOV, MKV, WebM)",
+      "trigger_keywords": [
+        "video",
+        "convert",
+        "mp4",
+        "transcode",
+        "ffmpeg",
+        "media",
+        "avi",
+        "mov",
+        "mkv"
+      ],
+      "task_types": [
+        "media_processing",
+        "file_conversion",
+        "video_editing"
+      ],
+      "source_repo": "ffmpeg/ffmpeg",
+      "usage_example": "skill:video_converter.convert(input='video.mov', output='video.mp4')",
+      "last_used": null,
+      "usage_count": 0
+    }
+  ],
   "skill_index": {
     "_description": "Lightweight index for quick skill lookup without loading full details",
-    "by_keyword": {},
-    "by_task_type": {},
-    "by_source_repo": {}
+    "by_keyword": {
+      "video": ["video_converter"],
+      "convert": ["video_converter"],
+      "mp4": ["video_converter"],
+      "transcode": ["video_converter"],
+      "ffmpeg": ["video_converter"],
+      "media": ["video_converter"],
+      "avi": ["video_converter"],
+      "mov": ["video_converter"],
+      "mkv": ["video_converter"]
+    },
+    "by_task_type": {
+      "media_processing": ["video_converter"],
+      "file_conversion": ["video_converter"],
+      "video_editing": ["video_converter"]
+    },
+    "by_source_repo": {
+      "ffmpeg/ffmpeg": ["video_converter"]
+    }
   },
   "usage_stats": {
-    "total_skills": 0,
+    "total_skills": 1,
     "total_invocations": 0,
     "avg_load_time_ms": 0,
     "cache_hit_rate": 0.0

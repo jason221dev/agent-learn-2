@@ -1,50 +1,154 @@
 {
-  "version": "1.0",
+  "version": "2.0",
   "created_at": "2026-03-24T04:04:37.401359",
   "optimization_targets": [
     "discovery_efficiency",
     "error_reduction",
     "tool_utilization",
-    "learning_speed"
+    "learning_speed",
+    "just_in_time_loading",
+    "skill_discovery"
   ],
   "performance_metrics": {
-  "discovery_cycle_time": "target < 5 minutes",
-  "error_rate": "target < 5%",
-  "auto_resolution_rate": "target > 90%",
-  "tool_adoption_rate": "target > 50%"
+    "discovery_cycle_time": "target < 3 minutes",
+    "error_rate": "target < 3%",
+    "auto_resolution_rate": "target > 95%",
+    "tool_adoption_rate": "target > 60%",
+    "skill_relevance_score": "target > 0.8",
+    "mcp_integration_success": "target > 90%"
+  },
+  "discovery_limits": {
+    "max_repos_per_keyword": 20,
+    "min_stars_required": 50,
+    "sort_by": "stars_recent",
+    "keywords": [
+      "skill",
+      "mcp",
+      "agent"
+    ]
   },
   "self_optimization_rules": [
-  {
-    "rule_id": "meta_001",
-    "trigger": "discovery_cycle_time > 10 minutes",
-    "action": "increase_parallelization",
-    "adjustment": "reduce search depth by 20%"
-  },
-  {
-    "rule_id": "meta_002",
-    "trigger": "error_rate > 10%",
-    "action": "tighten_threshold",
-    "adjustment": "increase score_threshold by 0.05"
-  },
-  {
-    "rule_id": "meta_003",
-    "trigger": "auto_resolution_rate < 80%",
-    "action": "expand_error_categories",
-    "adjustment": "add new error pattern analysis"
-  },
-  {
-    "rule_id": "meta_004",
-    "trigger": "tool_adoption_rate < 30%",
-    "action": "lower_install_threshold",
-    "adjustment": "decrease score_threshold by 0.05"
-  }
+    {
+      "rule_id": "meta_001",
+      "trigger": "discovery_cycle_time > 5 minutes",
+      "action": "reduce_discovery_scope",
+      "adjustment": "limit to top 10 repos per keyword, prioritize by stars"
+    },
+    {
+      "rule_id": "meta_002",
+      "trigger": "error_rate > 5%",
+      "action": "tighten_threshold",
+      "adjustment": "increase score_threshold by 0.1, require min 100 stars"
+    },
+    {
+      "rule_id": "meta_003",
+      "trigger": "auto_resolution_rate < 90%",
+      "action": "expand_error_patterns",
+      "adjustment": "analyze last 10 errors, add pattern matches for exact error wording"
+    },
+    {
+      "rule_id": "meta_004",
+      "rule_priority": "high",
+      "trigger": "tool_adoption_rate < 50%",
+      "action": "improve_skill_descriptions",
+      "adjustment": "generate detailed skill/MCP summaries with use cases, trigger words, and task mappings"
+    },
+    {
+      "rule_id": "meta_005",
+      "rule_priority": "critical",
+      "trigger": "llm_context_overload OR context_size > 80%",
+      "action": "enable_jit_loading",
+      "adjustment": "switch to just-in-time skill/MCP loading, load only on explicit request"
+    },
+    {
+      "rule_id": "meta_006",
+      "rule_priority": "high",
+      "trigger": "new_error_pattern_detected",
+      "action": "autonomous_architecture_improvement",
+      "adjustment": "analyze error root cause, propose architecture enhancement, create improvement proposal in learning/improvements/"
+    },
+    {
+      "rule_id": "meta_007",
+      "rule_priority": "critical",
+      "trigger": "any_new_error_pattern OR performance_degradation",
+      "action": "auto_execute_improvement",
+      "adjustment": "automatically implement proposed improvements without user approval, log to learning/improvements/auto_executed.json",
+      "enabled": true
+    }
   ],
+  "skill_registry": {
+    "location": "skills/registry.json",
+    "structure": {
+      "skill_id": "unique identifier",
+      "name": "human readable name",
+      "description": "brief explanation of what it does",
+      "trigger_keywords": [
+        "words that trigger this skill"
+      ],
+      "task_types": [
+        "types of tasks this skill handles"
+      ],
+      "source_repo": "original github repo",
+      "integration_path": "local path if integrated",
+      "usage_example": "example of how to invoke",
+      "last_used": "timestamp",
+      "usage_count": 0
+    },
+    "loading_strategy": "just_in_time",
+    "cache_strategy": "lru_cache_size_10"
+  },
+  "mcp_registry": {
+    "location": "mcps/registry.json",
+    "structure": {
+      "mcp_id": "unique identifier",
+      "name": "mcp name",
+      "description": "what resources/tools it provides",
+      "capabilities": [
+        "list of capabilities"
+      ],
+      "trigger_keywords": [
+        "when to use this mcp"
+      ],
+      "source_repo": "original github repo",
+      "config_template": "configuration template",
+      "last_used": "timestamp",
+      "usage_count": 0
+    },
+    "loading_strategy": "just_in_time",
+    "cache_strategy": "lru_cache_size_5"
+  },
+  "insight_registry": {
+    "location": "learning/insights.json",
+    "structure": {
+      "insight_id": "unique identifier",
+      "type": "error_pattern|success_pattern|optimization|discovery",
+      "trigger_pattern": "regex or keyword pattern",
+      "description": "what was learned",
+      "application": "how to apply this insight",
+      "confidence": 0.0,
+      "occurrences": 0,
+      "last_triggered": null
+    },
+    "loading_strategy": "on_demand",
+    "retention_policy": "keep_top_100_by_confidence"
+  },
   "feedback_loop": {
-  "enabled": true,
-  "evaluation_interval": "after_eaca_cycle",
-  "adjustment_magnitude": "adaptive",
-  "min_cycles_before_adjustment": 3
+    "enabled": true,
+    "evaluation_interval": "after_each_cycle",
+    "adjustment_magnitude": "adaptive",
+    "min_cycles_before_adjustment": 1,
+    "continuous_improvement": true
+  },
+  "architecture_improvements": {
+    "enabled": true,
+    "location": "learning/improvements/",
+    "auto_propose": true,
+    "auto_implement_threshold": 0.7,
+    "require_validation": true,
+    "auto_execute": true,
+    "require_approval": false
   },
   "performance_history": [],
-  "auto_tuning_enabled": true
+  "auto_tuning_enabled": true,
+  "just_in_time_optimization": true
 }

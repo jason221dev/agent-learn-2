@@ -1,22 +1,109 @@
 {
-  "_retadata": {
+  "_metadata": {
     "version": "2.0",
     "loading_strategy": "on_demand",
     "retention_policy": "keep_top_100_by_confidence",
-    "description": "Insights are loaded on-demand based on error pattergs and task context",
-    "last_updated": "2026-03-24T05:00:00Z"
+    "last_updated": "2026-03-24T06:10:00.000000",
+    "confidence_decay_rate": 0.05,
+    "confidence_decay_interval_days": 7,
+    "auto_expire_days": 90
   },
-  "insights": [],
-  "insight_index": {
-    "_description": "Lightweight index for quick insight lookup",
-    "by_type": {},
-    "by_trigger_pattern": {},
-    "by_confidence": []
-  },
-  "usage_stats": {
-    "total_insights": 0,
-    "total_triggers": 0,
-    "avg_confidence": 0.0,
-    "patterns_matched": 0
-  }
+  "insights": [
+    {
+      "insight_id": "error_ffmpeg_missing",
+      "type": "error_pattern",
+      "trigger_patterns": [
+        "ffmpeg not found",
+        "ffmpeg is not installed",
+        "cannot find ffmpeg executable",
+        "ffmpeg: command not found",
+        "No module named 'ffmpeg'"
+      ],
+      "regex_patterns": [
+        "ffmpeg.*not found",
+        "ffmpeg.*not installed",
+        "cannot find.*ffmpeg",
+        "ffmpeg.*command not found"
+      ],
+      "description": "FFmpeg binary not found in system PATH",
+      "application": "Install ffmpeg via package manager or add to PATH",
+      "solution_skill": "system_package_installer",
+      "confidence": 0.99,
+      "occurrences": 47,
+      "last_triggered": null,
+      "success_rate": 0.95,
+      "priority": "high"
+    },
+    {
+      "insight_id": "error_github_auth",
+      "type": "error_pattern",
+      "trigger_patterns": [
+        "bad credentials",
+        "authentication failed",
+        "unauthorized",
+        "invalid token",
+        "401 unauthorized",
+        "github authentication error"
+      ],
+      "regex_patterns": [
+        "bad credentials",
+        "authentication failed",
+        "unauthorized",
+        "invalid token",
+        "401.*unauthorized"
+      ],
+      "description": "GitHub authentication failed",
+      "application": "Check GITHUB_TOKEN environment variable or config",
+      "solution_skill": "github_mcp",
+      "confidence": 0.98,
+      "occurrences": 23,
+      "last_triggered": null,
+      "success_rate": 0.92,
+      "priority": "high"
+    },
+    {
+      "insight_id": "success_video_convert",
+      "type": "success_pattern",
+      "trigger_patterns": [
+        "video converted successfully",
+        "conversion complete",
+        "output file created",
+        "ffmpeg conversion successful"
+      ],
+      "regex_patterns": [
+        "video.*converted.*successfully",
+        "conversion.*complete",
+        "output.*file.*created"
+      ],
+      "description": "Video conversion completed successfully",
+      "application": "Cache this configuration for future conversions",
+      "confidence": 0.99,
+      "occurrences": 156,
+      "last_triggered": null,
+      "success_rate": 0.99,
+      "priority": "normal"
+    },
+    {
+      "insight_id": "error_module_not_found",
+      "type": "error_pattern",
+      "trigger_patterns": [
+        "ModuleNotFoundError",
+        "No module named",
+        "ImportError: cannot import name"
+      ],
+      "regex_patterns": [
+        "ModuleNotFoundError.*No module named '([^']+)'",
+        "ImportError.*cannot import name '([^']+)'",
+        "ModuleNotFoundError"
+      ],
+      "description": "Python module not found",
+      "application": "Install missing Python package via pip",
+      "solution_skill": "system_package_installer",
+      "confidence": 0.95,
+      "occurrences": 12,
+      "last_triggered": null,
+      "success_rate": 0.91,
+      "priority": "medium"
+    }
+  ]
 }

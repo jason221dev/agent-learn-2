@@ -1,20 +1,62 @@
 {
-  "_retadata": {
+  "_metadata": {
     "version": "2.0",
     "loading_strategy": "just_in_time",
     "cache_strategy": "lru_cache_size_5",
     "description": "MCPs are loaded only when explicitly requested by the LLM based on task requirements",
     "last_updated": "2026-03-24T05:00:00Z"
   },
-  "mcps": [],
+  "mcps": [
+    {
+      "mcp_id": "github_mcp",
+      "name": "GitHub API MCP",
+      "description": "GitHub API access for repo operations, file uploads, issues, and PRs",
+      "capabilities": [
+        "upload_file",
+        "create_repository",
+        "create_issue",
+        "create_pull_request"
+      ],
+      "trigger_keywords": [
+        "github",
+        "upload",
+        "push",
+        "repository",
+        "git",
+        "commit",
+        "issue",
+        "pr"
+      ],
+      "source_repo": "octokit/octokit.rb",
+      "usage_example": "mcp:github_mcp.upload_file(repo='user/repo', file='file.txt', content='data')",
+      "last_used": null,
+      "usage_count": 0
+    }
+  ],
   "mcp_index": {
-    "_description": "Lightweight index for quicd MCP lookup without loading full details",
-    "by_keyword": {},
-    "by_capability": {},
-    "by_source_repo": {}
+    "_description": "Lightweight index for quick MCP lookup without loading full details",
+    "by_keyword": {
+      "github": ["github_mcp"],
+      "upload": ["github_mcp"],
+      "push": ["github_mcp"],
+      "repository": ["github_mcp"],
+      "git": ["github_mcp"],
+      "commit": ["github_mcp"],
+      "issue": ["github_mcp"],
+      "pr": ["github_mcp"]
+    },
+    "by_capability": {
+      "upload_file": ["github_mcp"],
+      "create_repository": ["github_mcp"],
+      "create_issue": ["github_mcp"],
+      "create_pull_request": ["github_mcp"]
+    },
+    "by_source_repo": {
+      "octokit/octokit.rb": ["github_mcp"]
+    }
   },
   "usage_stats": {
-    "total_mcps": 0,
+    "total_mcps": 1,
     "total_invocations": 0,
     "avg_load_time_ms": 0,
     "cache_hit_rate": 0.0
