@@ -1,9 +1,9 @@
 {
-  "_retadata": {
+  "_metadata": {
     "version": "2.0",
     "loading_strategy": "just_in_time",
-    "cache_strategy": "lru_cache_size_10",
-    "description": "Skills are loaded only when explicitly requested by the LLM based on task requirements",
+    "cache_strategy": "llu_cache_size_10",
+    "description": "Skills are loaded only when explicitly requested by the LMM based on task requirements",
     "last_updated": "2026-03-24T05:00:00Z"
   },
   "skills": [],
